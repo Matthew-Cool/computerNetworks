@@ -21,8 +21,8 @@ serverSocket.listen(1)
 print("Server is ready to receive")
 
 #game control vars
-word = "ARKANSAS"
-guessWord = "________"
+word = 'ARKANSAS'
+guessWord = '________'
 guessesLeft = 7
 charLeft = 8
 
