@@ -59,18 +59,18 @@ while True:
         rtnStr = ""
         if len(letter) == 1 and letter.isalpha() and letter not in guessedLetters:
             # is just a letter
+            guessedLetters += letter
             if letter in word:
-                guessedLetters += letter
                 lettersReplace(letter)
                 if charLeft <= 0:
                     gameEndStr = "\n\nNice job!!! You guesses all the letters!\nThe word is ARKANSAS\n\nDisconnecting..."
                     connectionSocket.send(gameEndStr.encode('utf-8'))
                     break
                 else: 
-                    rtnStr += "Good guess! %s is in the word! (%i guesses left)\n%s" % (letter, guessesLeft, "".join(guessWord)) 
+                    rtnStr += "Good guess! %s is in the word! (%i guesses left)\n%s" % (letter, guessesLeft+1, "".join(guessWord)) 
             else:
                 guessesLeft -= 1
-                rtnStr += "Terrible guess! %s isn't in the word! (%i guesses left)\n%s" % (letter, guessesLeft, guessWord)
+                rtnStr += "Terrible guess! %s isn't in the word! (%i guesses left)\n%s" % (letter, guessesLeft+1, "".join(guessWord))
         else:
             # tell user to just send letter lol
             if letter in guessedLetters:
@@ -78,7 +78,7 @@ while True:
             else:
                 rtnStr += "Please only send only 1 character\nand make sure its actually a letter."
 
-        rtnStr += "---\n"
+        rtnStr += "\n---\n"
         connectionSocket.send(rtnStr.encode('utf-8'))
 
     guessesLeft = 7
