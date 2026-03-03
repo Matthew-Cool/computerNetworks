@@ -22,15 +22,15 @@ print("Server is ready to receive")
 
 #game control vars
 word = 'ARKANSAS'
-guessWord = '________'
+guessWord = list('________')
+guessedLetters = ''
 guessesLeft = 7
 charLeft = 8
 
 def lettersReplace(let):
     i = 0
     for char in word:
-        if let in char:
-            word[i] = '*'
+        if let == char:
             guessWord[i] = let
             charLeft -= 1
         i += 1
@@ -55,28 +55,34 @@ while True:
             break
 
         rtnStr = ""
-        if len(letter) == 1 and letter.isalpha():
+        if len(letter) == 1 and letter.isalpha() and letter not in guessedLetters:
             # is just a letter
             if letter in word:
+                guessedLetters += letter
                 lettersReplace(letter)
                 if charLeft <= 0:
                     gameEndStr = "\n\nNice job!!! You guesses all the letters!\nThe word is ARKANSAS\n\nDisconnecting..."
                     connectionSocket.send(gameEndStr.encode('utf-8'))
                     break
                 else: 
-                    rtnStr += "Good guess! %s is in the word! (%i guesses left)\n%s" % (letter, guessesLeft, guessWord) 
+                    rtnStr += "Good guess! %s is in the word! (%i guesses left)\n%s" % (letter, guessesLeft, "".join(guessWord)) 
             else:
                 guessesLeft -= 1
                 rtnStr += "Terrible guess! %s isn't in the word! (%i guesses left)\n%s" % (letter, guessesLeft, guessWord)
         else:
             # tell user to just send letter lol
-            rtnStr += "Please only send only 1 character\nand make sure its actually a letter."
+            if letter in guessedLetters:
+                rtnStr += "You've already guessed this letter! Please try a different letter."
+            else:
+                rtnStr += "Please only send only 1 character\nand make sure its actually a letter."
 
         rtnStr += "---\n"
         connectionSocket.send(rtnStr.encode('utf-8'))
 
     guessesLeft = 7
-    currentIndex = 0
+    charLeft = 8
+    guessedLetters = ''
+    guessedLetters = list('________')    
     connectionSocket.close()
 
     
