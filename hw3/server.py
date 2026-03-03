@@ -84,7 +84,7 @@ while True:
     guessesLeft = 7
     charLeft = 8
     guessedLetters = ''
-    guessedLetters = list('________')    
+    guessedWord = list('________')    
     connectionSocket.close()
 
     
