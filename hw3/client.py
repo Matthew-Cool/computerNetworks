@@ -23,11 +23,11 @@ while True:
     snd = letter.encode('utf-8')
     clientSocket.send(snd)
 
-    response = clientSocket.recv(1024)
+    response = clientSocket.recv(1024).decode('utf-8')
     if 'Nice job' in response or 'Sorry' in response:
-        print(response.decode('utf-8'))
+        print(response)
         break
-    print(response.decode('utf-8'))
+    print(response)
 
 clientSocket.close()
 
