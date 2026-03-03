@@ -24,7 +24,7 @@ while True:
     clientSocket.send(snd)
 
     response = clientSocket.recv(1024).decode('utf-8')
-    if 'Nice job' in response or 'Sorry' in response:
+    if 'Nice' in response or 'Sorry' in response:
         print(response)
         break
     print(response)
