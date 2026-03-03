@@ -28,6 +28,8 @@ guessesLeft = 7
 charLeft = 8
 
 def lettersReplace(let):
+    global charLeft, guessWord, word
+
     i = 0
     for char in word:
         if let == char:
