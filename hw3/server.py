@@ -41,8 +41,8 @@ while True:
     connectionSocket, addr = serverSocket.accept()
     print("user connected from ", addr)
 
-    initStr = 'Lets play hangman! The word has 8 letters!\n'
-    connectionSocket.send(initStr.encode('utf-8'))
+    #initStr = 'Lets play hangman! The word has 8 letters!\n'
+    #connectionSocket.send(initStr.encode('utf-8'))
 
     # lets play a game, so keep user connected in a loop
     while True:
@@ -53,6 +53,7 @@ while True:
             break
         
         #lets get the letter
+        #maybe try catch block so if client disconnects it doesn't crash server...?
         letter = connectionSocket.recv(1024).decode('utf-8').strip().upper()
         
         # got nothing, assume client left us :(
