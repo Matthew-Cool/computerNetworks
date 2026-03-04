@@ -56,7 +56,7 @@ while True:
         
         # got nothing, assume client left us :(
         if not letter:
-            print("Didn't get value from client, so the client (%s) must've disconnected by accident." % (addr))
+            print("Didn't get value from client, so the client (%s) must've disconnected by accident." % (str(addr)))
             break
 
         rtnStr = ""
