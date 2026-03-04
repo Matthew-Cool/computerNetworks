@@ -75,10 +75,10 @@ while True:
                     connectionSocket.send(gameEndStr.encode('utf-8'))
                     break
                 else: 
-                    rtnStr += "Good guess! %s is in the word! (%i guesses left)\n%s" % (letter, guessesLeft+1, "".join(guessWord)) 
+                    rtnStr += "Good guess! %s is in the word! (%i guesses left)\n%s" % (letter, guessesLeft, "".join(guessWord)) 
             else:
                 guessesLeft -= 1
-                rtnStr += "Terrible guess! %s isn't in the word! (%i guesses left)\n%s" % (letter, guessesLeft+1, "".join(guessWord))
+                rtnStr += "Terrible guess! %s isn't in the word! (%i guesses left)\n%s" % (letter, guessesLeft, "".join(guessWord))
         else:
             # tell user to just send letter lol
             if letter in guessedLetters:
