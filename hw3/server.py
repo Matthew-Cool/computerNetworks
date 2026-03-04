@@ -54,7 +54,10 @@ while True:
         
         #lets get the letter
         #maybe try catch block so if client disconnects it doesn't crash server...?
-        letter = connectionSocket.recv(1024).decode('utf-8').strip().upper()
+        try: 
+            letter = connectionSocket.recv(1024).decode('utf-8').strip().upper()
+        except:
+            print("Error receiving from client. Client probably disconnected.")
         
         # got nothing, assume client left us :(
         if not letter:
@@ -83,7 +86,7 @@ while True:
             else:
                 rtnStr += "Please only send only 1 character\nand make sure its actually a letter."
 
-        rtnStr += "\n---\n"
+        rtnStr += "\n\n"
         connectionSocket.send(rtnStr.encode('utf-8'))
 
     guessesLeft = 7
