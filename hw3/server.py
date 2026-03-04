@@ -95,7 +95,7 @@ while True:
     guessedLetters = ''
     guessWord = list('________')    
     connectionSocket.close()
-    print('client %s has disconnected, waiting for new player...' % (addr))
+    print('client %s has disconnected, waiting for new player...' % (str(addr)))
 
     
 
