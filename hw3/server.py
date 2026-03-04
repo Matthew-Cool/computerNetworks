@@ -41,7 +41,7 @@ while True:
     connectionSocket, addr = serverSocket.accept()
     print("user connected from ", addr)
 
-    initStr = 'Lets play hangman! The word has $i letters!\n%s\n\n' % (len(word), "".join(guessWord))
+    initStr = 'Lets play hangman! The word has %i letters!\n%s\n\n' % (len(word), "".join(guessWord))
     connectionSocket.send(initStr.encode('utf-8'))
 
     # lets play a game, so keep user connected in a loop
