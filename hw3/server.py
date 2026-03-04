@@ -41,6 +41,9 @@ while True:
     connectionSocket, addr = serverSocket.accept()
     print("user connected from ", addr)
 
+    initStr = 'Lets play hangman! The word has 8 letters!\n'
+    connectionSocket.send(initStr.encode('utf-8'))
+
     # lets play a game, so keep user connected in a loop
     while True:
         # check end condition
@@ -54,6 +57,7 @@ while True:
         
         # got nothing, assume client left us :(
         if not letter:
+            print("Didn't get value from client, so the client (%s) must've disconnected by accident." % (addr))
             break
 
         rtnStr = ""

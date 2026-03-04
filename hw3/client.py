@@ -16,7 +16,7 @@ clientSocket = socket(AF_INET, SOCK_STREAM)
 
 clientSocket.connect((serverName, serverPort))
 
-print('Lets play hangman! The word has 8 letters!\n')
+#print('Lets play hangman! The word has 8 letters!\n')
 
 while True:
     letter = input("Input a letter: ")
