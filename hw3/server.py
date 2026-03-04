@@ -53,6 +53,7 @@ while True:
             letter = connectionSocket.recv(1024).decode('utf-8').strip().upper()
         except:
             print("Error receiving from client. Client probably disconnected.")
+            break
         
         # got nothing, assume client left us :(
         if not letter:
