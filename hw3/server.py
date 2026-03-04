@@ -46,11 +46,6 @@ while True:
 
     # lets play a game, so keep user connected in a loop
     while True:
-        # check end condition
-        if guessesLeft <= 0:
-            gameEndStr = "\n\nSorry! But you didn't guess the word in time!\nThe word was: ARKANSAS\n\nDisconnecting..."
-            connectionSocket.send(gameEndStr.encode('utf-8'))
-            break
         
         #lets get the letter
         #maybe try catch block so if client disconnects it doesn't crash server...?
@@ -78,7 +73,13 @@ while True:
                     rtnStr += "Good guess! %s is in the word! (%i guesses left)\n%s" % (letter, guessesLeft, "".join(guessWord)) 
             else:
                 guessesLeft -= 1
-                rtnStr += "Terrible guess! %s isn't in the word! (%i guesses left)\n%s" % (letter, guessesLeft, "".join(guessWord))
+                # check end condition
+                if guessesLeft <= 0:
+                    gameEndStr = "\n\nSorry! But you didn't guess the word in time!\nThe word was: ARKANSAS\n\nDisconnecting..."
+                    connectionSocket.send(gameEndStr.encode('utf-8'))
+                    break
+                else:
+                    rtnStr += "Terrible guess! %s isn't in the word! (%i guesses left)\n%s" % (letter, guessesLeft+1, "".join(guessWord))
         else:
             # tell user to just send letter lol
             if letter in guessedLetters:
@@ -92,7 +93,7 @@ while True:
     guessesLeft = 7
     charLeft = 8
     guessedLetters = ''
-    guessedWord = list('________')    
+    guessWord = list('________')    
     connectionSocket.close()
 
     
