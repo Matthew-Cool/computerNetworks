@@ -23,6 +23,12 @@ print(welcome)
 
 while True:
     letter = input("Input a letter: ")
+
+    #make sure we don't send nothing and get stuck...
+    if letter == "":
+        print("Nothing was sent to the server, please type a single letter into the input!\n\n")
+        continue
+
     snd = letter.encode('utf-8')
     clientSocket.send(snd)
 
